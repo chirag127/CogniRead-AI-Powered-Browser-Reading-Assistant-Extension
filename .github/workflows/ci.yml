@@ -1,0 +1,70 @@
+name: CI
+
+# This workflow will do a compile, scan, build and test the project.
+# It uses GitHub Actions to automate the build and test process for the repository.
+# It is designed to be highly compatible with modern JavaScript/TypeScript projects using Vite and common testing frameworks.
+
+# Trigger the workflow on push events to the main branch or pull request events.
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Define the environment in which the job will run.
+jobs:
+  build:
+    # Use the latest Ubuntu operating system as the runner.
+    runs-on: ubuntu-latest
+
+    # Define the steps to be executed in the CI pipeline.
+    steps:
+      # Check out the repository code.
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment.
+      # Uses Node.js 18.x as a stable and widely supported version.
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm' # Cache npm dependencies for faster builds.
+
+      # Install dependencies using npm.
+      - name: Install Dependencies
+        run: npm ci # Use 'ci' for cleaner, faster installs in CI environments.
+
+      # Run linters and formatters to ensure code quality.
+      # This step checks for code style and potential issues.
+      - name: Lint and Format Check
+        run: npm run lint # Assumes a 'lint' script is defined in package.json.
+
+      # Build the project using Vite.
+      # This step compiles the project for production.
+      - name: Build Project
+        run: npm run build --if-present # Executes the build script, only if it exists.
+
+      # Run unit tests.
+      # This step executes the test suite to verify functionality.
+      - name: Run Unit Tests
+        run: npm test # Assumes a 'test' script is defined in package.json.
+
+      # Upload code coverage reports (optional).
+      # This step is crucial for tracking code coverage trends.
+      # - name: Upload Coverage Reports
+      #   uses: codecov/codecov-action@v4 # Use codecov for comprehensive coverage analysis.
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      #   with:
+      #     directory: ./coverage
+      #     fail_ci_if_error: true
+
+      # Deploy to GitHub Pages (example for static sites/extensions).
+      # This step automates the deployment process to a hosting service.
+      # - name: Deploy to GitHub Pages
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist # Adjust based on your Vite build output directory.
