@@ -1,55 +1,49 @@
-# Security Policy for CogniRead-AI-Powered-Browser-Reading-Assistant-Extension
+# Security Policy for CogniRead-AI-Reading-Assistant-Browser-Extension
 
-As the Apex Technical Authority, we treat security as a first-class citizen. This document outlines the process for responsibly disclosing security vulnerabilities found in this project.
+As an Apex project, **CogniRead-AI-Reading-Assistant-Browser-Extension** adheres to the **Zero-Defect, High-Velocity, Future-Proof** philosophy. Security is integrated into every stage of development, reflecting Late 2025 best practices.
 
-## 1. Supported Versions
+## Supported Versions
 
-This repository aims for immediate patching upon discovery. Security updates are applied to the `main` branch and subsequently backported if necessary.
+| Version | Status | Supported Until | Notes |
+| :--- | :--- | :--- | :--- |
+| Latest Release | Supported | Ongoing | Active Patching |
 
-| Version | Status |
-| :--- | :--- |
-| Latest (Main Branch) | Supported and actively monitored |
-| Previous Major Releases | Monitored for critical vulnerabilities |
+## Reporting a Vulnerability
 
-## 2. Vulnerability Reporting
+We take security vulnerabilities seriously. If you discover any security issue, please follow the process below to report it responsibly.
 
-We strongly encourage responsible disclosure. Please report security issues privately before making them public.
+1.  **Do not** create a public issue or pull request.
+2.  Email the designated security contact immediately: `security@apex-architect.dev` (Placeholder for high-priority communication).
+3.  In your email, clearly describe the vulnerability, including the affected component, the steps to reproduce it, and the potential impact.
 
-**Reporting Channel:**
+We commit to acknowledging receipt of your report within **48 hours** and will work diligently to provide a patched release.
 
-1.  **Create a Private GitHub Issue:** Use the built-in issue tracking system and select the `Security Vulnerability` template (if available), or explicitly mark the issue as **confidential** in the title and description.
-2.  **Email Contact (Fallback):** If immediate resolution is required or private issue tracking fails, email the maintainer directly: `security@chirag127.dev` (Note: This is a placeholder for demonstration; use the established GitHub process).
+## Vulnerability Disclosure Timeline
 
-**Required Information for Disclosure:**
+We adhere to a responsible disclosure timeline to ensure the security of all users:
 
-To facilitate rapid triage and remediation, please include the following details in your report:
+1.  **Report Received:** We begin investigation immediately.
+2.  **Patch Development:** A fix is developed using **TypeScript/JavaScript** standards (ESLint/Biome enforced, strict type checking).
+3.  **Internal Testing:** The fix is rigorously tested via our CI pipeline (`.github/workflows/ci.yml`) using **Playwright** for critical E2E security flows.
+4.  **Release:** Once the patch is verified, a new version will be published. We aim to release a fix within **14 days** of a valid vulnerability report.
+5.  **Public Disclosure:** Public communication regarding the vulnerability (e.g., updating the GitHub Security Advisory) will occur *after* the patch is released.
 
-*   **Product/Component:** Specify which part of the extension is affected (e.g., Content Script, Background Worker, Gemini API integration).
-*   **Vulnerability Type:** (e.g., XSS, CSRF, Insecure Data Storage, Supply Chain Risk).
-*   **Steps to Reproduce:** Detailed, unambiguous steps to trigger the vulnerability.
-*   **Impact:** A clear description of the potential harm (e.g., data exfiltration, denial of service).
-*   **Suggested Mitigation (Optional but appreciated):** Any pointers toward a fix based on the TypeScript/Vite stack.
+## Security Audit & Practices
 
-## 3. Timeline and Feedback
+This project emphasizes a proactive security stance:
 
-We commit to the following initial response times:
+*   **Dependency Scanning:** Automated scanning of all npm dependencies is integrated into the CI pipeline using industry-standard tools (e.g., Snyk or GitHub Dependabot).
+*   **API Key Management:** **NEVER** hardcode sensitive keys (like the Gemini API Key) in source code. Configuration must be managed via environment variables (`.env` files managed locally, excluded via `.gitignore`).
+*   **Content Security Policy (CSP):** Strict CSP headers are enforced in the extension manifest to mitigate XSS attacks against injected content.
+*   **Code Review:** All code merges require at least one approving review, focusing specifically on potential injection vectors and API interaction validation.
 
-*   **Acknowledgement:** Within 48 hours of receiving a report.
-*   **Triage & Confirmation:** Within 7 business days.
-*   **Patch Release:** Aiming for a fix to be deployed to the `main` branch within 14 business days, depending on severity and complexity.
+## Dependencies
 
-We will keep the reporter informed throughout the remediation process.
+This project relies heavily on the **Google Gemini API**. Users must ensure their API credentials are handled securely according to Google's best practices. This repository **DOES NOT** store, manage, or expose user API keys.
 
-## 4. Remediation Policy (Apex Standard)
+For a full list of dependencies, please refer to the project's `package.json`.
 
-All discovered vulnerabilities are treated under the principle of **Zero-Defect, High-Velocity**. This means:
+--- 
 
-1.  **Immediate Isolation:** If necessary, affected functionalities may be temporarily disabled or rolled back until a validated patch is deployed.
-2.  **Supply Chain Integrity:** Dependencies (managed via `npm` or `pnpm` equivalent for this TypeScript project) are scanned continuously via CI workflows (`.github/workflows/ci.yml`) using modern vulnerability scanners (e.g., Snyk integration, or built-in GitHub Dependabot alerts).
-3.  **Verification:** Patches must pass **ALL** unit tests (Vitest) and end-to-end tests (Playwright) defined in the repository structure.
-
-## 5. Disclaimer
-
-This security policy applies to the source code hosted under `https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension`.
-
-Issues related to third-party services (e.g., Google Gemini API) should be directed to their respective vendors. However, insecure integration patterns exploiting these third-party services within our extension codebase will be addressed under this policy.
+*Last Reviewed: December 2025 by Apex Technical Authority*
+[Report Security Issue](mailto:security@apex-architect.dev)
