@@ -1,60 +1,37 @@
-# Configuration for repository badges displayed in the README.md.
-# This file centralizes badge definitions for consistency and easy updates.
-# Style: flat-square is mandatory for all badges.
+# FILE: badges.yml
+# Apex Technical Authority - Badge Configuration Standard 1.0
+
+repo_name: CogniRead-AI-Reading-Assistant-Browser-Extension
+user: chirag127
+style: flat-square
 
 badges:
-  - name: "CI/CD Status"
-    imageUrl: "https://img.shields.io/github/actions/workflow/status/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white"
-    targetUrl: "https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/actions/workflows/ci.yml"
-    markdown: "[
-![CI/CD Status](https://img.shields.io/github/actions/workflow/status/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white)
-](https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/actions/workflows/ci.yml)"
+  - name: Build Status
+    image: https://img.shields.io/github/actions/workflow/status/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/ci.yml?branch=main&style=flat-square
+    link: https://github.com/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/actions/workflows/ci.yml
+    markdown: "[![Build Status](https://img.shields.io/github/actions/workflow/status/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/ci.yml?branch=main&style=flat-square)](https://github.com/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/actions/workflows/ci.yml)"
 
-  - name: "Code Coverage"
-    imageUrl: "https://img.shields.io/codecov/c/github/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension?style=flat-square&token=CODECOV_TOKEN_PLACEHOLDER&logo=codecov"
-    targetUrl: "https://codecov.io/gh/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension"
-    markdown: "[
-![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension?style=flat-square&token=CODECOV_TOKEN_PLACEHOLDER&logo=codecov)
-](https://codecov.io/gh/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension)"
+  - name: Code Coverage
+    image: https://img.shields.io/codecov/c/github/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension?style=flat-square&token=YOUR_CODECOV_TOKEN
+    link: https://codecov.io/gh/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension
+    markdown: "[![Code Coverage](https://img.shields.io/codecov/c/github/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension?style=flat-square)](https://codecov.io/gh/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension)"
 
-  - name: "TypeScript"
-    imageUrl: "https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white"
-    targetUrl: "https://www.typescriptlang.org/"
-    markdown: "[
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-](https://www.typescriptlang.org/)"
+  - name: Technology Stack
+    image: https://img.shields.io/badge/Stack-TS%20%7C%20Vite%20%7C%20Gemini%20API-4A90E2?style=flat-square&logo=typescript&logoColor=white
+    link: https://www.typescriptlang.org/
+    markdown: "[![Stack](https://img.shields.io/badge/Stack-TS%20%7C%20Vite%20%7C%20Gemini%20API-4A90E2?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)"
 
-  - name: "Vite"
-    imageUrl: "https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white"
-    targetUrl: "https://vitejs.dev/"
-    markdown: "[
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
-](https://vitejs.dev/)"
+  - name: Linting and Formatting
+    image: https://img.shields.io/badge/Code%20Quality-Biome-3CB371?style=flat-square&logo=biome&logoColor=white
+    link: https://biomejs.dev/
+    markdown: "[![Code Quality](https://img.shields.io/badge/Code%20Quality-Biome-3CB371?style=flat-square&logo=biome&logoColor=white)](https://biomejs.dev/)"
 
-  - name: "WXT"
-    imageUrl: "https://img.shields.io/badge/WXT-5736E5?style=flat-square&logo=wxt&logoColor=white"
-    targetUrl: "https://wxt.dev/"
-    markdown: "[
-![WXT](https://img.shields.io/badge/WXT-5736E5?style=flat-square&logo=wxt&logoColor=white)
-](https://wxt.dev/)"
+  - name: License
+    image: https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg?style=flat-square
+    link: https://creativecommons.org/licenses/by-nc/4.0/
+    markdown: "[![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-blue.svg?style=flat-square)](https://creativecommons.org/licenses/by-nc/4.0/)"
 
-  - name: "Formatter: Biome"
-    imageUrl: "https://img.shields.io/badge/Biome-60A5FA?style=flat-square&logo=biome&logoColor=white"
-    targetUrl: "https://biomejs.dev/"
-    markdown: "[
-![Formatter: Biome](https://img.shields.io/badge/Biome-60A5FA?style=flat-square&logo=biome&logoColor=white)
-](https://biomejs.dev/)"
-
-  - name: "License"
-    imageUrl: "https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=flat-square"
-    targetUrl: "https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/blob/main/LICENSE"
-    markdown: "[
-![License](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=flat-square)
-](https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/blob/main/LICENSE)"
-
-  - name: "GitHub Stars"
-    imageUrl: "https://img.shields.io/github/stars/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension?style=flat-square&logo=github&label=Stars"
-    targetUrl: "https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/stargazers"
-    markdown: "[
-![GitHub Stars](https://img.shields.io/github/stars/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension?style=flat-square&logo=github&label=Stars)
-](https://github.com/chirag127/CogniRead-AI-Powered-Browser-Reading-Assistant-Extension/stargazers)"
+  - name: GitHub Stars
+    image: https://img.shields.io/github/stars/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension?style=flat-square&color=yellow
+    link: https://github.com/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/stargazers
+    markdown: "[![GitHub stars](https://img.shields.io/github/stars/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension?style=flat-square&color=yellow)](https://github.com/chirag127/CogniRead-AI-Reading-Assistant-Browser-Extension/stargazers)"
