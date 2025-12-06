@@ -1,70 +1,74 @@
 name: CI
 
-# This workflow will do a compile, scan, build and test the project.
-# It uses GitHub Actions to automate the build and test process for the repository.
-# It is designed to be highly compatible with modern JavaScript/TypeScript projects using Vite and common testing frameworks.
+# This workflow runs tests and lints the JavaScript codebase.
+# It is triggered on pushes to the main branch and on pull requests.
 
-# Trigger the workflow on push events to the main branch or pull request events.
+permissions: read-all
+
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-# Define the environment in which the job will run.
 jobs:
-  build:
-    # Use the latest Ubuntu operating system as the runner.
+  build-and-test:
     runs-on: ubuntu-latest
 
-    # Define the steps to be executed in the CI pipeline.
     steps:
-      # Check out the repository code.
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      # Set up Node.js environment.
-      # Uses Node.js 18.x as a stable and widely supported version.
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-          cache: 'npm' # Cache npm dependencies for faster builds.
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        # Cache npm dependencies for faster installs.
 
-      # Install dependencies using npm.
-      - name: Install Dependencies
-        run: npm ci # Use 'ci' for cleaner, faster installs in CI environments.
+    - name: Install dependencies
+      run: npm ci
+      # Use 'npm ci' for deterministic installs in CI environments.
 
-      # Run linters and formatters to ensure code quality.
-      # This step checks for code style and potential issues.
-      - name: Lint and Format Check
-        run: npm run lint # Assumes a 'lint' script is defined in package.json.
+    - name: Run Linters and Formatters (Biome)
+      run: npx @biomejs/biome check --apply src/
+      # Use Biome for ultra-fast linting and formatting. '--apply' attempts to fix violations.
 
-      # Build the project using Vite.
-      # This step compiles the project for production.
-      - name: Build Project
-        run: npm run build --if-present # Executes the build script, only if it exists.
+    - name: Run Tests (Vitest)
+      run: npm run test:ci
+      # This assumes a 'test:ci' script in package.json that runs Vitest.
+      # Example package.json script: "test:ci": "vitest run --coverage"
 
-      # Run unit tests.
-      # This step executes the test suite to verify functionality.
-      - name: Run Unit Tests
-        run: npm test # Assumes a 'test' script is defined in package.json.
+    - name: Upload coverage reports to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        # Ensure CODECOV_TOKEN is set in repository secrets.
+        # This step uploads coverage data for analysis.
 
-      # Upload code coverage reports (optional).
-      # This step is crucial for tracking code coverage trends.
-      # - name: Upload Coverage Reports
-      #   uses: codecov/codecov-action@v4 # Use codecov for comprehensive coverage analysis.
-      #   env:
-      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+    # For browser extensions, E2E testing might involve more complex setups (e.g., Playwright)
+    # If Playwright is used, uncomment and configure the following steps:
+    # - name: Install Playwright browsers
+    #   run: npx playwright install
+    # - name: Run End-to-End Tests (Playwright)
+    #   run: npm run test:e2e
+    #   env:
+    #     CI: true
+    #     # Ensure PLAYWRIGHT_BASE_URL is set if needed.
+
+    - name: Check for license headers (if applicable)
+      # Example: If a tool like 'license-checker' or custom script is used.
+      # run: npm run check-licenses
+      pass
+      # Placeholder for potential license header checks.
+
+    - name: Upload artifact for review (optional)
+      # This step can be used to upload built extension files for manual inspection.
+      # Consider what build artifacts are relevant for a browser extension.
+      # If using Vite for building:
+      #   run: npm run build
+      #   uses: actions/upload-artifact@v4
       #   with:
-      #     directory: ./coverage
-      #     fail_ci_if_error: true
-
-      # Deploy to GitHub Pages (example for static sites/extensions).
-      # This step automates the deployment process to a hosting service.
-      # - name: Deploy to GitHub Pages
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     publish_dir: ./dist # Adjust based on your Vite build output directory.
+      #     name: cogniread-extension-build
+      #     path: dist/ # Or the relevant build output directory
+      pass
